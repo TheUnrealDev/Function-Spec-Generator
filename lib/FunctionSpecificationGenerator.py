@@ -17,6 +17,7 @@ def onFunctionSpecCreated(funcSpecification):
     if shouldCopy:
         pyperclip.copy(funcSpecification.formatSpecification())
         print("Success!")
+        input()
 
 
 def createFunctionSpec():
