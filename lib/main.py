@@ -1,13 +1,28 @@
-"""
-/**
-* Drops a number of items from the front of a list.
-* @example
-* // results in list(3, 4, 5)
-* drop(2, list(1, 2, 3, 4, 5));
-* @param {number} count - number of items to drop
-* @param {list} xs - input list
-* @precondition count is not negative.
-* @returns {list} Returns the input list xs without its first count elements.
-*/
-"""
+from create_function_spec import create_function_specification
+from user_interface import (
+    getValidatedStringInput,
+    validateYesAndNoResponse,
+    previewFunctionSpec
+)
 
+import pyperclip
+
+
+def onFunctionSpecCreated(funcSpecification):
+    previewFunctionSpec(funcSpecification)
+
+    shouldCopy = getValidatedStringInput(
+        "Do you want to copy this to your clipboard? [y/n]: ",
+        validateYesAndNoResponse)
+    if shouldCopy:
+        pyperclip.copy(funcSpecification.formatSpecification())
+        print("Success!")
+
+
+def createFunctionSpec():
+    funcSpecification = create_function_specification()
+    onFunctionSpecCreated(funcSpecification)
+
+
+if __name__ == '__main__':
+    createFunctionSpec()
